@@ -1,12 +1,12 @@
 
 import PageTemplate from './PageTemplate';
-import { FileContract } from 'lucide-react';
+import { FileText } from 'lucide-react';
 
 const TermsOfService = () => {
   return (
     <PageTemplate 
       title="Terms of Service" 
-      icon={<FileContract className="text-primary h-6 w-6" />}
+      icon={<FileText className="text-primary h-6 w-6" />}
       description="Legal terms governing the use of our platform."
     />
   );
