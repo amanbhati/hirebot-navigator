@@ -1,3 +1,4 @@
+
 import { useEffect, useState, useRef } from 'react';
 
 export const useInView = (options = {}, once = true) => {
@@ -95,5 +96,74 @@ export const containerHoverAnimation = {
       duration: 0.3,
       ease: [0.22, 1, 0.36, 1]
     }
+  }
+};
+
+export const useUploadAnimation = () => {
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [uploadState, setUploadState] = useState<'idle' | 'uploading' | 'success' | 'error'>('idle');
+  
+  const startUpload = () => {
+    setUploadState('uploading');
+    setUploadProgress(0);
+    
+    const interval = setInterval(() => {
+      setUploadProgress(prev => {
+        if (prev >= 100) {
+          clearInterval(interval);
+          setUploadState('success');
+          return 100;
+        }
+        return prev + 5;
+      });
+    }, 150);
+    
+    return () => clearInterval(interval);
+  };
+  
+  const resetUpload = () => {
+    setUploadState('idle');
+    setUploadProgress(0);
+  };
+  
+  return { uploadProgress, uploadState, startUpload, resetUpload };
+};
+
+export const animationVariants = {
+  fadeIn: {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    exit: { opacity: 0 },
+    transition: { duration: 0.5 }
+  },
+  fadeInUp: {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: 20 },
+    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] }
+  },
+  fadeInDown: {
+    initial: { opacity: 0, y: -20 },
+    animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: -20 },
+    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] }
+  },
+  fadeInLeft: {
+    initial: { opacity: 0, x: -20 },
+    animate: { opacity: 1, x: 0 },
+    exit: { opacity: 0, x: -20 },
+    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] }
+  },
+  fadeInRight: {
+    initial: { opacity: 0, x: 20 },
+    animate: { opacity: 1, x: 0 },
+    exit: { opacity: 0, x: 20 },
+    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] }
+  },
+  scaleUp: {
+    initial: { opacity: 0, scale: 0.8 },
+    animate: { opacity: 1, scale: 1 },
+    exit: { opacity: 0, scale: 0.8 },
+    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] }
   }
 };

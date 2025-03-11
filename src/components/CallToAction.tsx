@@ -73,6 +73,24 @@ const CallToAction = () => {
                   </motion.li>
                 ))}
               </ul>
+
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+                transition={{ 
+                  duration: 0.4,
+                  delay: 0.8,
+                  ease: [0.22, 1, 0.36, 1]
+                }}
+              >
+                <a 
+                  href="/apply" 
+                  className="inline-flex items-center gap-2 text-primary hover:underline"
+                >
+                  <span>Try our application process</span>
+                  <ArrowRight size={16} />
+                </a>
+              </motion.div>
             </motion.div>
             
             <motion.div
