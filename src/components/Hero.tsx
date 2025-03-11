@@ -1,9 +1,11 @@
 
 import { ArrowRight } from 'lucide-react';
-import { useInView } from '@/lib/animations';
+import { useInView, useHoverImage } from '@/lib/animations';
+import { motion } from 'framer-motion';
 
 const Hero = () => {
   const { ref, isInView } = useInView({}, true);
+  const { isHovered, hoverProps } = useHoverImage();
 
   return (
     <section
@@ -50,49 +52,84 @@ const Hero = () => {
           </div>
         </div>
 
-        <div className={`mt-16 glass-panel rounded-xl overflow-hidden shadow-xl max-w-5xl transition-all duration-1000 delay-300 ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}>
+        <motion.div 
+          className={`mt-16 glass-panel rounded-xl overflow-hidden shadow-xl max-w-5xl transition-all duration-1000 delay-300 ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}
+          whileHover={{
+            boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
+            y: -5,
+            transition: { duration: 0.3 }
+          }}
+          {...hoverProps}
+        >
           <div className="aspect-video bg-gradient-to-br from-primary/5 to-primary/10 flex items-center justify-center">
             <div className="w-full max-w-4xl flex flex-col items-center justify-center p-8">
-              <div className="w-full h-12 bg-white/80 rounded-lg mb-4 flex items-center px-4">
+              <motion.div 
+                className="w-full h-12 bg-white/80 rounded-lg mb-4 flex items-center px-4"
+                animate={isHovered ? { y: [0, -5, 0], transition: { repeat: Infinity, duration: 3 }} : {}}
+              >
                 <div className="w-24 h-6 bg-primary/20 rounded-md"></div>
                 <div className="ml-auto flex gap-2">
                   <div className="w-8 h-8 bg-primary/30 rounded-md"></div>
                   <div className="w-8 h-8 bg-primary/20 rounded-md"></div>
                 </div>
-              </div>
+              </motion.div>
               <div className="grid grid-cols-3 gap-4 w-full">
-                <div className="col-span-1 bg-white/80 rounded-lg p-4 h-64">
+                <motion.div 
+                  className="col-span-1 bg-white/80 rounded-lg p-4 h-64"
+                  animate={isHovered ? { 
+                    y: [0, -8, 0], 
+                    transition: { repeat: Infinity, duration: 4, delay: 0.5 } 
+                  } : {}}
+                >
                   <div className="w-full h-6 bg-primary/20 rounded-md mb-4"></div>
                   <div className="w-full h-4 bg-primary/10 rounded-md mb-2"></div>
                   <div className="w-3/4 h-4 bg-primary/10 rounded-md mb-2"></div>
                   <div className="w-full h-4 bg-primary/10 rounded-md mb-4"></div>
                   <div className="w-24 h-8 bg-primary/30 rounded-md mx-auto mt-4"></div>
-                </div>
-                <div className="col-span-2 bg-white/80 rounded-lg p-4 h-64">
+                </motion.div>
+                <motion.div 
+                  className="col-span-2 bg-white/80 rounded-lg p-4 h-64"
+                  animate={isHovered ? { 
+                    y: [0, -5, 0], 
+                    transition: { repeat: Infinity, duration: 3, delay: 0.2 } 
+                  } : {}}
+                >
                   <div className="w-full h-6 bg-primary/20 rounded-md mb-4"></div>
                   <div className="grid grid-cols-2 gap-3">
-                    <div className="bg-primary/10 rounded-md p-3 h-24">
+                    <motion.div 
+                      className="bg-primary/10 rounded-md p-3 h-24"
+                      animate={isHovered ? { scale: [1, 1.02, 1], transition: { repeat: Infinity, duration: 2 } } : {}}
+                    >
                       <div className="w-full h-4 bg-primary/20 rounded-md mb-2"></div>
                       <div className="w-3/4 h-4 bg-primary/20 rounded-md"></div>
-                    </div>
-                    <div className="bg-primary/10 rounded-md p-3 h-24">
+                    </motion.div>
+                    <motion.div 
+                      className="bg-primary/10 rounded-md p-3 h-24"
+                      animate={isHovered ? { scale: [1, 1.02, 1], transition: { repeat: Infinity, duration: 2, delay: 0.3 } } : {}}
+                    >
                       <div className="w-full h-4 bg-primary/20 rounded-md mb-2"></div>
                       <div className="w-3/4 h-4 bg-primary/20 rounded-md"></div>
-                    </div>
-                    <div className="bg-primary/10 rounded-md p-3 h-24">
+                    </motion.div>
+                    <motion.div 
+                      className="bg-primary/10 rounded-md p-3 h-24"
+                      animate={isHovered ? { scale: [1, 1.02, 1], transition: { repeat: Infinity, duration: 2, delay: 0.6 } } : {}}
+                    >
                       <div className="w-full h-4 bg-primary/20 rounded-md mb-2"></div>
                       <div className="w-3/4 h-4 bg-primary/20 rounded-md"></div>
-                    </div>
-                    <div className="bg-primary/10 rounded-md p-3 h-24">
+                    </motion.div>
+                    <motion.div 
+                      className="bg-primary/10 rounded-md p-3 h-24"
+                      animate={isHovered ? { scale: [1, 1.02, 1], transition: { repeat: Infinity, duration: 2, delay: 0.9 } } : {}}
+                    >
                       <div className="w-full h-4 bg-primary/20 rounded-md mb-2"></div>
                       <div className="w-3/4 h-4 bg-primary/20 rounded-md"></div>
-                    </div>
+                    </motion.div>
                   </div>
-                </div>
+                </motion.div>
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

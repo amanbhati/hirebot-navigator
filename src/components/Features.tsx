@@ -1,5 +1,5 @@
 
-import { useInView, staggerAnimation } from '@/lib/animations';
+import { useInView, staggerAnimation, useHoverImage, imageHoverAnimation, containerHoverAnimation } from '@/lib/animations';
 import { Search, Users, MessageSquare, FileText, BarChart, Shield, 
   RefreshCw, LineChart, Globe, Clock } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -90,10 +90,26 @@ const Features = () => {
                 delay: 0.1 * index,
                 ease: [0.22, 1, 0.36, 1]
               }}
+              whileHover={containerHoverAnimation.hover}
             >
-              <div className="bg-primary/10 rounded-lg w-12 h-12 flex items-center justify-center mb-4">
-                <feature.icon className="text-primary" size={24} />
-              </div>
+              <motion.div 
+                className="bg-primary/10 rounded-lg w-12 h-12 flex items-center justify-center mb-4"
+                whileHover={{
+                  backgroundColor: 'rgba(var(--primary), 0.2)',
+                  scale: 1.1,
+                  rotate: 5,
+                  transition: { duration: 0.2 }
+                }}
+              >
+                <motion.div
+                  whileHover={{
+                    rotate: [0, -10, 10, -5, 0],
+                    transition: { duration: 0.5 }
+                  }}
+                >
+                  <feature.icon className="text-primary" size={24} />
+                </motion.div>
+              </motion.div>
               <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
               <p className="text-muted-foreground text-sm flex-grow">{feature.description}</p>
             </motion.div>

@@ -1,4 +1,3 @@
-
 import { useEffect, useState, useRef } from 'react';
 
 export const useInView = (options = {}, once = true) => {
@@ -59,4 +58,42 @@ export const staggerAnimation = (index: number, baseDelay = 0.05) => {
       ease: [0.22, 1, 0.36, 1]
     }
   };
+};
+
+export const useHoverImage = () => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  const hoverProps = {
+    onMouseEnter: () => setIsHovered(true),
+    onMouseLeave: () => setIsHovered(false),
+    onTouchStart: () => setIsHovered(true),
+    onTouchEnd: () => setIsHovered(false),
+  };
+
+  return { isHovered, hoverProps };
+};
+
+export const imageHoverAnimation = {
+  initial: { scale: 1, rotate: 0 },
+  hover: { 
+    scale: 1.05, 
+    rotate: 1,
+    transition: { 
+      duration: 0.3,
+      ease: [0.22, 1, 0.36, 1]
+    }
+  }
+};
+
+export const containerHoverAnimation = {
+  initial: { 
+    boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)" 
+  },
+  hover: { 
+    boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+    transition: { 
+      duration: 0.3,
+      ease: [0.22, 1, 0.36, 1]
+    }
+  }
 };

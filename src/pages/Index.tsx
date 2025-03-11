@@ -34,7 +34,8 @@ const Index = () => {
             <motion.div
               animate={{ 
                 scale: [1, 1.2, 1],
-                opacity: [1, 0.8, 1]
+                opacity: [1, 0.8, 1],
+                rotateZ: [0, 10, 0, -10, 0]
               }}
               transition={{ 
                 duration: 1.5,
@@ -43,15 +44,34 @@ const Index = () => {
               }}
               className="w-24 h-24 flex items-center justify-center"
             >
-              <div className="bg-primary text-white h-16 w-16 rounded-lg flex items-center justify-center font-bold text-3xl">
+              <motion.div 
+                className="bg-primary text-white h-16 w-16 rounded-lg flex items-center justify-center font-bold text-3xl"
+                animate={{
+                  boxShadow: [
+                    "0 0 0 rgba(var(--primary), 0.3)",
+                    "0 0 20px rgba(var(--primary), 0.6)",
+                    "0 0 0 rgba(var(--primary), 0.3)"
+                  ]
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              >
                 H
-              </div>
+              </motion.div>
             </motion.div>
           </motion.div>
         ) : null}
       </AnimatePresence>
 
-      <div className="min-h-screen flex flex-col">
+      <motion.div 
+        className="min-h-screen flex flex-col"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5, delay: 0.3 }}
+      >
         <Navbar />
         <main className="flex-grow">
           <Hero />
@@ -60,7 +80,7 @@ const Index = () => {
           <CallToAction />
         </main>
         <Footer />
-      </div>
+      </motion.div>
     </>
   );
 };
